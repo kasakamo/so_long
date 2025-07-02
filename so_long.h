@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/06/30 19:21:53 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/07/02 18:42:20 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 
 # include <stdlib.h>
 
-typedef struct	s_map
+typedef struct s_map
 {
 	char	**grid;
 	int		width;
 	int		height;
-} t_map;
+	int		pl_cnt;
+	int		ex_cnt;
+	int		cl_cnt;
+	int		pl_x;
+	int		pl_y;
+}	t_map;
 
 char	**loadmap(const char *file, int *height);
 
