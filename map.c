@@ -6,90 +6,117 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:44:52 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/07/02 19:04:28 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/10 19:09:23 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "get_next_line.h"
 #include <fcntl.h>
-#include <stdlib.h>
 
-int	is_surrounded_by_walls()
-{
-	
-}
-
-int	check_line_chars(t_map *map, char *line, int y)
-{
-	int	x;
-
-	map->pl_cnt = 0;
-	map->ex_cnt = 0;
-	map->cl_cnt = 0;
-	x = 0;
-	while (line[x] && line[x] != '\n')
-	{
-		if (line[x] == 'P')
-		{
-			map->pl_cnt++;
-			map->pl_x = x;
-			map->pl_y = y;
-		}
-		else if (line[x] == 'E')
-			map->ex_cnt++;
-		else if (line[x] == 'C')
-			map->cl_cnt++;
-		else if (line[x] != '0' && line[x] != '1')
-			return (0);
-		x++;
-	}
-	return (x == map->width);
-}
-
-int	is_valid_map(t_map *map)
+int	check_elements(t_game *game)
 {
 	int	i;
+	int	j;
 
-	if (!map->grid || map->height <= 0)
-		return (0);
-	map->width = 0;
-	while (map->grid[0][map->width] && map->grid[0][map->width] != '\n')
-		map->width++;
-	i = 0;
-	while (i < map->height)
+	game->pl_cnt = 0;
+	game->ex_cnt = 0;
+	game->cl_cnt = 0;
+	i = -1;
+	while (++i < game->height)
 	{
-		if (!check_line_chars(map, map->grid[i], i))
-			return (0);
+		j = -1;
+		while (++j < game->width)
+		{
+			if (game->map[i][j] == 'P')
+				game->pl_cnt++;
+			else if (game->map[i][j] == 'E')
+				game->ex_cnt++;
+			else if (game->map[i][j] == 'C')
+				game->cl_cnt++;
+			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
+				return (0);
+		}
+	}
+	return (game->pl_cnt == 1 && game->ex_cnt == 1 && game->cl_cnt > 0);
+}
+
+int	check_walls(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < game->height)
+	{
+		j = 0;
+		while (j < game->width)
+		{
+			if ((i == 0 || i == game->height - 1
+				|| j == 0 || j == game->width - 1)
+				&& game->map[i][j] != '1')
+				return (0);
+			j++;
+		}
 		i++;
 	}
-	if (!is_surrounded_by_walls())
+	return (1);
+}
+
+int	is_rectangular(t_game *game)
+{
+	int	i;
+	int	len;
+
+	game->height = 0;
+	game->width = ft_strlen(game->map[0]);
+	while (game->map[game->height])
+		game->height++;
+	i = 0;
+	while (i < game->height)
+	{
+		len = ft_strlen(game->map[i++]);
+		if (len != game->width)
+			return (0);
+	}
+	return (1);
+}
+
+int	is_valid_map(t_game *game)
+{
+	if (!is_rectangular(game))
 		return (0);
-	if (map->pl_cnt != 1 || map->ex_cnt != 1 || map->cl_cnt < 1)
+	if (!check_walls(game))
+		return (0);
+	if (!check_elements(game))
 		return (0);
 	return (1);
 }
 
-char	**load_map(const char *file, int *height)
+int	load_map(const char *file, t_game *game)
 {
 	int		fd;
-	char	**map;
 	char	*line;
-	int		i;
+	char	*map_str;
+	char	*tmp;
 
 	fd = open(file, O_RDONLY);
-	map = malloc(sizeof(char *) * 100000);
-	if (!map || fd < 0)
-		return (NULL);
-	i = 0;
+	if (fd < 0)
+		return (0);
+	map_str = ft_strdup("");
 	line = get_next_line(fd);
 	while (line)
 	{
-		map[i++] = line;
+		tmp = ft_strjoin(map_str, line);
+		free(map_str);
+		map_str = tmp;
+		free(line);
 		line = get_next_line(fd);
 	}
-	map[i] = '\0';
-	*height = i;
 	close(fd);
-	return (map);
+	game->map = ft_split(map_str, '\n');
+	free(map_str);
+	if (!game->map || !(is_valid_map(game)))
+		return (0);
+	return (1);
 }

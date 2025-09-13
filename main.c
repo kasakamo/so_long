@@ -6,35 +6,78 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:45:36 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/07/02 18:20:21 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:00:38 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	load_textures(t_game *game)
+{
+	game->textures->floor = load_image(game->mlx, "textures/floor.xpm");
+	game->textures->wall = load_image(game->mlx, "textures/wall.xpm");
+	game->textures->player = load_image(game->mlx, "textures/player.xpm");
+	game->textures->exit = load_image(game->mlx, "textures/exit.xpm");
+	game->textures->collectible = load_image(game->mlx, "textures/collectible.xpm");
+}
+
+static void	*load_image(void *mlx, char *path)
+{
+	int		w;
+	int		h;
+	void	*img;
+
+	img = mlx_xpm_file_to_image(mlx, path, &w, &h);
+	if (!img)
+	{
+		ft_printf("Error: load_texture failed");
+		exit(1);
+	}
+	return (img);
+}
+
+void	init_game(t_game *game)
+{
+	game->mlx = mlx_init();
+	if (!game->mlx)
+	{
+		ft_printf("Error: mlx_init failed");
+		exit(1);
+	}
+	game->win = mlx_new_window(game->mlx, game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long");
+	if (!game->win)
+	{
+		ft_printf("Error: mlx_new_window failed");
+		exit(1);
+	}
+}
+
+void	free_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (game->map)
+	{
+		while (game->map[i])
+			free(game->map[i++]);
+		free(game->map);
+	}
+}
+
 int	main(int ac, char **av)
 {
-	t_map	map;
-	int		i;
+	t_game	game;
+	int i;
 
 	if (ac != 2)
+		return (ft_printf("Usage: %s map.ber\n", av[0]), 1);
+	if (!(load_map(av[1], &game)))
 	{
-		ft_printf("Usage: ./so_long map.ber\n");
-		return (1);
+		free_map(&game);
+		return (ft_printf("Error: Invalid map.\n"), 1);
 	}
-	map.gird = load_map(av[1], &map.height);
-	if (!map.grid)
-	{
-		ft_printf("Error: failed to load map.\n");
-		return (1);
-	}
-	if (!is_valid_map(&map))
-	{
-		ft_printf("Error: invalid map.\n");
-		return (1);
-	}
-	ft_printf("Map is valid!\n");
-	i = 0;
-	while (i < map.height)
-		ft_printf("%s", map.grid[i++]);
+	init_game(&game);
+	load_textures(&game);
+	render_map(&game);
 }

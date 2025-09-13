@@ -6,29 +6,51 @@
 #    By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 18:31:07 by kasakamo          #+#    #+#              #
-#    Updated: 2025/07/02 17:56:27 by kasakamo         ###   ########.fr        #
+#    Updated: 2025/09/10 19:28:30 by kasakamo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ilibft -Ift_printf -Iget_next_line
 
-SRC = main.c map.c 
+SRC = main.c map.c
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
+LIBFT_DIR = ./libft
+LIBFT_A = $(LIBFT_DIR)/libft.a
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAG) $(OBJ)
+PRINTF_DIR = ./ft_printf
+PRINTF_A = $(PRINTF_DIR)/libftprintf.a
+
+GNL_DIR = ./get_next_line
+GNL_SRC = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+GNL_OBJ = $(GNL_SRC:.c=.o)
+
+MLXFLAGS = -lmlx -lXext -lX11 -lm -lz
+
+all: $(LIBFT_A) $(PRINTF_A) $(NAME)
+
+$(NAME): $(OBJ) $(GNL_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT_A) $(PRINTF_A) $(MLXFLAGS) -o $(NAME)
+
+$(LIBFT_A):
+	$(MAKE) -C $(LIBFT_DIR)
+
+$(PRINTF_A):
+	$(MAKE) -C $(PRINTF_DIR)
 
 RM = rm -f
 
 clean:
-	$(RM) $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(PRINTF_DIR) clean
+	$(RM) $(OBJ) $(GNL_OBJ)
 
 fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(PRINTF_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
