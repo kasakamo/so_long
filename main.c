@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:45:36 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/11 20:00:38 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:00:07 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	load_textures(t_game *game)
 {
-	game->textures->floor = load_image(game->mlx, "textures/floor.xpm");
-	game->textures->wall = load_image(game->mlx, "textures/wall.xpm");
-	game->textures->player = load_image(game->mlx, "textures/player.xpm");
-	game->textures->exit = load_image(game->mlx, "textures/exit.xpm");
-	game->textures->collectible = load_image(game->mlx, "textures/collectible.xpm");
+	game->floor = load_image(game->mlx, "textures/floor.xpm");
+	game->wall = load_image(game->mlx, "textures/wall.xpm");
+	game->player = load_image(game->mlx, "textures/player.xpm");
+	game->exit = load_image(game->mlx, "textures/exit.xpm");
+	game->collect = load_image(game->mlx, "textures/collectible.xpm");
 }
 
 static void	*load_image(void *mlx, char *path)
@@ -68,7 +68,7 @@ void	free_map(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int i;
+	int		i;
 
 	if (ac != 2)
 		return (ft_printf("Usage: %s map.ber\n", av[0]), 1);
@@ -80,4 +80,6 @@ int	main(int ac, char **av)
 	init_game(&game);
 	load_textures(&game);
 	render_map(&game);
+	mlx_key_hook(game.win, handle_key, &game);
+	mlx_hook(game.win, 17, 0, close_game, &game);
 }

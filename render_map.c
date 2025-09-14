@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 19:30:27 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/10 20:24:45 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:59:33 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	render_map(t_game *game)
 		while (x < game->width)
 		{
 			c = hame->map[y][x];
-			put_tile(game, game->textures->floor, x, y);
+			put_tile(game, game->floor, x, y);
 			if (c == '1')
-				put_tile(game, game->textures->wall, x, y);
+				put_tile(game, game->wall, x, y);
 			else if (c == 'P')
-				put_tile(game, game->textures->player, x, y);
+				put_tile(game, game->player, x, y);
 			else if (c == 'E')
-				put_tile(game, game->textures->exit, x, y);
+				put_tile(game, game->exit, x, y);
 			else if (c == 'C')
-				put_tile(game, game->textures->collectible, x, y);
+				put_tile(game, game->collect, x, y);
 			x++;
 		}
 	}

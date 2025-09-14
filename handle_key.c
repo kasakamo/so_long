@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:50:48 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/13 18:41:05 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:52:07 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	move_player(t_game *game, int x, int y)
 	if (next == '1')
 		return ;
 	if (next == 'C')
-		game->collectibles--;
+		game->collect--;
 	if (next == 'E')
 	{
-		if (game->collectibles == 0)
+		if (game->collect == 0)
 		{
 			ft_printf("You win!");
 			close_game(game);
@@ -35,8 +35,7 @@ void	move_player(t_game *game, int x, int y)
 	game->pl_x = x;
 	game->pl_y = y;
 	game->moves++;
-	ft_putnbr_fd(game->moves, 1);
-	ft_printf("\n");
+	ft_printf("%d\n", game->moves);
 	render_map(game);
 }
 
@@ -48,7 +47,7 @@ int	handle_key(int keycode, t_game *game)
 	x = game->pl_x;
 	y = game->pl_y;
 	if (keycode == XK_Escape)
-		close_game(game)
+		close_game(game);
 	else if (keycode == XK_w || keycode == XK_Up)
 		y--;
 	else if (keycode == XK_s || keycode == XK_Down)

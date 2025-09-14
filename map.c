@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:44:52 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/10 19:09:23 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:45:36 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_walls(t_game *game)
 		while (j < game->width)
 		{
 			if ((i == 0 || i == game->height - 1
-				|| j == 0 || j == game->width - 1)
+					|| j == 0 || j == game->width - 1)
 				&& game->map[i][j] != '1')
 				return (0);
 			j++;

@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/12 01:30:47 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:18:01 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@
 # include "ft_printf.h"
 
 # define TILE_SIZE 32
-
-typedef struct s_textures
-{
-	void	*wall;
-	void	*floor;
-	void	*player;
-	void	*exit;
-	void	*collectible;
-} t_textures;
 
 typedef struct s_game
 {
@@ -40,7 +31,11 @@ typedef struct s_game
 	int		pl_cnt;
 	int		ex_cnt;
 	int		cl_cnt;
-	t_textures	textures;
+	void	*wall;
+	void	*floor;
+	void	*player;
+	void	*exit;
+	void	*collect;
 }	t_game;
 
 void	free_map(t_game *game);
@@ -53,5 +48,10 @@ int		check_elements(t_game *game);
 
 void	init_game(t_game *game);
 void	load_textures(t_game *game);
+
+int		handle_key(int keycode, t_game *game);
+void	move_player(t_game *game, int x, int y);
+
+int		close_game(t_game *game);
 
 #endif
