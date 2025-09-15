@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:45:36 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/14 21:00:07 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:47:51 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	free_map(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int		i;
 
 	if (ac != 2)
 		return (ft_printf("Usage: %s map.ber\n", av[0]), 1);

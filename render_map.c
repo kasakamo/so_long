@@ -6,13 +6,13 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 19:30:27 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/14 20:59:33 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/15 03:10:48 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	put_tile(t_game *game, void *img, int x, int y)
+void	put_tile(t_game *game, void *img, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y * TILE_SIZE);
 }
@@ -41,5 +41,6 @@ void	render_map(t_game *game)
 				put_tile(game, game->collect, x, y);
 			x++;
 		}
+		y++;
 	}
 }

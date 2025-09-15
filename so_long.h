@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/14 21:18:01 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/15 03:10:58 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int		check_elements(t_game *game);
 
 void	init_game(t_game *game);
 void	load_textures(t_game *game);
+
+void	render_map(t_game *game);
+void	put_tile(t_game *game, void *img, int x, int y);
 
 int		handle_key(int keycode, t_game *game);
 void	move_player(t_game *game, int x, int y);

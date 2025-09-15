@@ -6,7 +6,7 @@
 #    By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 18:31:07 by kasakamo          #+#    #+#              #
-#    Updated: 2025/09/10 19:28:30 by kasakamo         ###   ########.fr        #
+#    Updated: 2025/09/15 03:08:53 by kasakamo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilibft -Ift_printf -Iget_next_line
 
-SRC = main.c map.c
+SRC = main.c map.c render_map.c handle_key.c destroy.c
 OBJ = $(SRC:.c=.o)
 
 LIBFT_DIR = ./libft
