@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 20:51:16 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/14 20:59:23 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/17 16:42:53 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->player);
 	if (game->exit)
 		mlx_destroy_image(game->mlx, game->exit);
-	if (game->collec)
-		mlx_destroy_image(game->mlx, game->collec);
+	if (game->collect)
+		mlx_destroy_image(game->mlx, game->collect);
 }
 
 int	close_game(t_game *game)

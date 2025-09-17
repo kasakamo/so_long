@@ -6,20 +6,11 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:45:36 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/15 17:47:51 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/17 16:46:23 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	load_textures(t_game *game)
-{
-	game->floor = load_image(game->mlx, "textures/floor.xpm");
-	game->wall = load_image(game->mlx, "textures/wall.xpm");
-	game->player = load_image(game->mlx, "textures/player.xpm");
-	game->exit = load_image(game->mlx, "textures/exit.xpm");
-	game->collect = load_image(game->mlx, "textures/collectible.xpm");
-}
 
 static void	*load_image(void *mlx, char *path)
 {
@@ -30,10 +21,18 @@ static void	*load_image(void *mlx, char *path)
 	img = mlx_xpm_file_to_image(mlx, path, &w, &h);
 	if (!img)
 	{
-		ft_printf("Error: load_texture failed");
+		ft_printf("Error: load_texture failed\n");
 		exit(1);
 	}
 	return (img);
+}
+void	load_textures(t_game *game)
+{
+	game->floor = load_image(game->mlx, "textures/floor.xpm");
+	game->wall = load_image(game->mlx, "textures/wall.xpm");
+	game->player = load_image(game->mlx, "textures/player.xpm");
+	game->exit = load_image(game->mlx, "textures/exit.xpm");
+	game->collect = load_image(game->mlx, "textures/collectible.xpm");
 }
 
 void	init_game(t_game *game)
@@ -41,13 +40,13 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		ft_printf("Error: mlx_init failed");
+		ft_printf("Error: mlx_init failed\n");
 		exit(1);
 	}
 	game->win = mlx_new_window(game->mlx, game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long");
 	if (!game->win)
 	{
-		ft_printf("Error: mlx_new_window failed");
+		ft_printf("Error: mlx_new_window failed\n");
 		exit(1);
 	}
 }

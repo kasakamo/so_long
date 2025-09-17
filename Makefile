@@ -6,14 +6,18 @@
 #    By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 18:31:07 by kasakamo          #+#    #+#              #
-#    Updated: 2025/09/15 03:08:53 by kasakamo         ###   ########.fr        #
+#    Updated: 2025/09/17 16:33:43 by kasakamo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilibft -Ift_printf -Iget_next_line
+CFLAGS = -Wall -Wextra -Werror -Iminilibx-linux -Ilibft -Ift_printf -Iget_next_line
+
+MLX_DIR = ./minilibx-linux
+MLX = $(MLX_DIR)/libmlx.a
+MLXFLAGS = -lXext -lX11 -lm -lz
 
 SRC = main.c map.c render_map.c handle_key.c destroy.c
 OBJ = $(SRC:.c=.o)
@@ -28,12 +32,10 @@ GNL_DIR = ./get_next_line
 GNL_SRC = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 GNL_OBJ = $(GNL_SRC:.c=.o)
 
-MLXFLAGS = -lmlx -lXext -lX11 -lm -lz
-
 all: $(LIBFT_A) $(PRINTF_A) $(NAME)
 
 $(NAME): $(OBJ) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT_A) $(PRINTF_A) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT_A) $(PRINTF_A) $(MLX) -L$(MLX_DIR) $(MLXFLAGS) -o $(NAME)
 
 $(LIBFT_A):
 	$(MAKE) -C $(LIBFT_DIR)
