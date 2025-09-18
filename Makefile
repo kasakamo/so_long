@@ -6,7 +6,7 @@
 #    By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 18:31:07 by kasakamo          #+#    #+#              #
-#    Updated: 2025/09/17 16:33:43 by kasakamo         ###   ########.fr        #
+#    Updated: 2025/09/19 04:11:42 by kasakamo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ GNL_DIR = ./get_next_line
 GNL_SRC = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
 GNL_OBJ = $(GNL_SRC:.c=.o)
 
-all: $(LIBFT_A) $(PRINTF_A) $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJ) $(GNL_OBJ)
+$(NAME): $(OBJ) $(GNL_OBJ) $(LIBFT_A) $(PRINTF_A)
 	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT_A) $(PRINTF_A) $(MLX) -L$(MLX_DIR) $(MLXFLAGS) -o $(NAME)
 
 $(LIBFT_A):
@@ -43,16 +43,21 @@ $(LIBFT_A):
 $(PRINTF_A):
 	$(MAKE) -C $(PRINTF_DIR)
 
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
+
 RM = rm -f
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PRINTF_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) $(OBJ) $(GNL_OBJ)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PRINTF_DIR) fclean
+	$(MAKE) -C $(MLX_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all
