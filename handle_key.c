@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 13:50:48 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/17 16:44:34 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/18 23:35:43 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	move_player(t_game *game, int x, int y)
 
 int	handle_key(int keycode, t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = game->pl_x;
 	y = game->pl_y;

@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:45:36 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/17 16:46:23 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/18 23:38:01 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	*load_image(void *mlx, char *path)
 	}
 	return (img);
 }
+
 void	load_textures(t_game *game)
 {
 	game->floor = load_image(game->mlx, "textures/floor.xpm");
@@ -43,7 +44,9 @@ void	init_game(t_game *game)
 		ft_printf("Error: mlx_init failed\n");
 		exit(1);
 	}
-	game->win = mlx_new_window(game->mlx, game->width * TILE_SIZE, game->height * TILE_SIZE, "so_long");
+	game->win = mlx_new_window(game->mlx, \
+		game->width * TILE_SIZE, \
+		game->height * TILE_SIZE, "so_long");
 	if (!game->win)
 	{
 		ft_printf("Error: mlx_new_window failed\n");

@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 19:30:27 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/17 16:37:23 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/18 23:38:25 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	put_tile(t_game *game, void *img, int x, int y)
 {
-	mlx_put_image_to_window(game->mlx, game->win, img, x * TILE_SIZE, y * TILE_SIZE);
+	mlx_put_image_to_window(game->mlx, game->win, \
+		img, x * TILE_SIZE, y * TILE_SIZE);
 }
 
 void	render_map(t_game *game)
