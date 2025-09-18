@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/17 16:45:25 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/19 05:29:20 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 
 typedef struct s_game
 {
@@ -51,7 +51,10 @@ int		check_walls(t_game *game);
 int		check_elements(t_game *game);
 
 void	init_game(t_game *game);
+void	find_player(t_game *game);
+
 void	load_textures(t_game *game);
+void	*load_image(void *mlx, char *path);
 
 void	render_map(t_game *game);
 void	put_tile(t_game *game, void *img, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 19:30:27 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/18 23:38:25 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/19 05:45:23 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void	render_map(t_game *game)
 		while (x < game->width)
 		{
 			c = game->map[y][x];
-			put_tile(game, game->floor, x, y);
-			if (c == '1')
+			if (c == '0')
+				put_tile(game, game->floor, x, y);
+			else if (c == '1')
 				put_tile(game, game->wall, x, y);
 			else if (c == 'P')
 				put_tile(game, game->player, x, y);

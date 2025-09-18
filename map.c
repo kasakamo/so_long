@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:44:52 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/14 20:45:36 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/19 05:54:34 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_elements(t_game *game)
 				return (0);
 		}
 	}
-	return (game->pl_cnt == 1 && game->ex_cnt == 1 && game->cl_cnt > 0);
+	return (game->pl_cnt == 1 && game->ex_cnt > 0 && game->cl_cnt > 0);
 }
 
 int	check_walls(t_game *game)
