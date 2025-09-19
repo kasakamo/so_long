@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/19 05:29:20 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/19 22:27:18 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_game
 	int		pl_cnt;
 	int		ex_cnt;
 	int		cl_cnt;
+	int		ex_fnd;
+	int		cl_fnd;
 	int		moves;
 	void	*wall;
 	void	*floor;
@@ -50,8 +52,13 @@ int		is_rectangular(t_game *game);
 int		check_walls(t_game *game);
 int		check_elements(t_game *game);
 
-void	init_game(t_game *game);
+int		check_route(t_game *game);
+char	**dup_map(char **map, int height);
 void	find_player(t_game *game);
+void	flood_fill(char **map, int y, int x, t_game *game);
+void	free_map_dup(char **map, int height);
+
+void	init_game(t_game *game);
 
 void	load_textures(t_game *game);
 void	*load_image(void *mlx, char *path);

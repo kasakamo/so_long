@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:44:52 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/19 05:54:34 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/09/19 21:44:03 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	is_valid_map(t_game *game)
 	if (!check_walls(game))
 		return (0);
 	if (!check_elements(game))
+		return (0);
+	if (!check_route(game))
 		return (0);
 	return (1);
 }
