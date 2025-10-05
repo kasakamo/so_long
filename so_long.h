@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/19 22:27:18 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/05 18:12:17 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_game
 	void	*collect;
 }	t_game;
 
+int		is_ber(char *file);
 void	free_map(t_game *game);
+void	init_game(t_game *game);
 
 int		load_map(const char *file, t_game *game);
 int		is_valid_map(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 20:31:17 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/09/19 22:27:30 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:18:09 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ char	**dup_map(char **map, int height)
 int	check_route(t_game *game)
 {
 	char	**map;
-	int		found_c;
-	int		found_e;
 
 	map = dup_map(game->map, game->height);
 	if (!map)
@@ -104,7 +102,7 @@ int	check_route(t_game *game)
 	find_player(game);
 	flood_fill(map, game->pl_y, game->pl_x, game);
 	free_map_dup(map, game->height);
-	if (found_c != game->cl_cnt || found_e == 0)
+	if (game->cl_fnd != game->cl_cnt || game->ex_fnd == 0)
 		return (0);
 	return (1);
 }
