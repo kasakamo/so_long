@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/10/05 18:12:17 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/09 20:02:22 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	free_map(t_game *game);
 void	init_game(t_game *game);
 
 int		load_map(const char *file, t_game *game);
+char	*read_join(const char *file);
+
+int		check_nl(char *s);
 int		is_valid_map(t_game *game);
 int		is_rectangular(t_game *game);
 int		check_walls(t_game *game);
