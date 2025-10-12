@@ -6,13 +6,29 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:44:52 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/10/09 20:01:36 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:35:27 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "get_next_line.h"
 #include <fcntl.h>
+
+int	check_nl(char *s)
+{
+	int	i;
+
+	if (!s)
+		return (0);
+	i = 0;
+	while (s[i] && s[i + 1])
+	{
+		if (s[i] == '\n' && s[i + 1] == '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 char	*read_join(const char *file)
 {

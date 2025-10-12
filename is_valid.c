@@ -6,11 +6,26 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 20:00:22 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/10/09 20:01:41 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:35:12 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	check_window_size(t_game *game)
+{
+	int	w;
+	int	h;
+
+	w = ft_strlen(game->map[0]) * TILE_SIZE;
+	h = 0;
+	while (game->map[h])
+		h++;
+	h *= TILE_SIZE;
+	if (w > MAX_WIDTH || h > MAX_HEIGHT)
+		return (0);
+	return (1);
+}
 
 int	check_elements(t_game *game)
 {
@@ -92,21 +107,7 @@ int	is_valid_map(t_game *game)
 		return (0);
 	if (!check_route(game))
 		return (0);
-	return (1);
-}
-
-int	check_nl(char *s)
-{
-	int	i;
-
-	if (!s)
+	if (!check_window_size(game))
 		return (0);
-	i = 0;
-	while (s[i] && s[i + 1])
-	{
-		if (s[i] == '\n' && s[i + 1] == '\n')
-			return (0);
-		i++;
-	}
 	return (1);
 }

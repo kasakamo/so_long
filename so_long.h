@@ -6,7 +6,7 @@
 /*   By: kasakamo <kasakamo@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:47:34 by kasakamo          #+#    #+#             */
-/*   Updated: 2025/10/09 20:02:22 by kasakamo         ###   ########.fr       */
+/*   Updated: 2025/10/12 17:35:51 by kasakamo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <X11/X.h>
 
 # define TILE_SIZE 64
+# define MAX_WIDTH 1920
+# define MAX_HEIGHT 1080
 
 typedef struct s_game
 {
@@ -50,12 +52,13 @@ void	init_game(t_game *game);
 
 int		load_map(const char *file, t_game *game);
 char	*read_join(const char *file);
-
 int		check_nl(char *s);
+
 int		is_valid_map(t_game *game);
 int		is_rectangular(t_game *game);
 int		check_walls(t_game *game);
 int		check_elements(t_game *game);
+int		check_window_size(t_game *game);
 
 int		check_route(t_game *game);
 char	**dup_map(char **map, int height);
